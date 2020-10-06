@@ -6,7 +6,8 @@ import "./home-page.styles.scss";
 // Components
 import SearchForm from "../../components/search-form/search-form.component";
 import SearchResult from "../../components/search-result/search-result.component";
-import CustomButton from '../../components/custom-btn/custom-btn.component'
+import CustomButton from "../../components/custom-btn/custom-btn.component";
+import Skeleton from "../../components/search-result-skeleton/search-result-skeleton.component";
 
 const HomePage = () => {
 	return (
@@ -14,11 +15,12 @@ const HomePage = () => {
 			<SearchForm />
 			<div className="search-results">
 				{[...Array(10)].map((_, i) => (
-					<SearchResult key={i} />
+					// <SearchResult key={i} />
+					<Skeleton key={i} />
 				))}
 			</div>
 			<div className="navigation-btns">
-				<CustomButton buttonText={"Previous Page"}/>
+				<CustomButton buttonText={"Previous Page"} />
 				<CustomButton buttonText={"Next Page"} />
 			</div>
 		</div>
