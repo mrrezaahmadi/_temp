@@ -15,8 +15,8 @@ const HomePage = () => {
 			<SearchForm />
 			<div className="search-results">
 				{[...Array(10)].map((_, i) => (
-					// <SearchResult key={i} />
-					<Skeleton key={i} />
+					<SearchResult key={i} />
+					// <Skeleton key={i} />
 				))}
 			</div>
 			<div className="navigation-btns">

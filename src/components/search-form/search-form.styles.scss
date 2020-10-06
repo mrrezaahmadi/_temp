@@ -4,10 +4,14 @@
 	border: none;
 	border: 1px black solid;
 	background-color: white;
-	color: black;
+    color: black;
+    padding: 0 10px;
 	&:focus {
 		outline: none;
-	}
+    }
+    &::placeholder {
+        padding: 0 10px;
+    }
 }
 
 
