@@ -7,7 +7,7 @@ const SearchResult = () => {
     return (
         <div className="search-result">
             <div className="header">
-                <a href="#">header</a>
+                <a href="#" target="_blank">header</a>
             </div>
             <div className="subheader">
                 subheader

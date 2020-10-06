@@ -6,6 +6,7 @@ import "./home-page.styles.scss";
 // Components
 import SearchForm from "../../components/search-form/search-form.component";
 import SearchResult from "../../components/search-result/search-result.component";
+import CustomButton from '../../components/custom-btn/custom-btn.component'
 
 const HomePage = () => {
 	return (
@@ -17,8 +18,8 @@ const HomePage = () => {
 				))}
 			</div>
 			<div className="navigation-btns">
-				<div className="prev-page-btn"></div>
-				<div className="next-page-btn"></div>
+				<CustomButton buttonText={"Previous Page"}/>
+				<CustomButton buttonText={"Next Page"} />
 			</div>
 		</div>
 	);

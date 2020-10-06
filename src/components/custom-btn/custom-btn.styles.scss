@@ -1,0 +1,20 @@
+// colors
+$main-blue-btn: rgb(60, 60, 255);
+$light-blue-btn: rgba(60, 60, 255, 0.9);
+
+.custom-btn {
+	background-color: $main-blue-btn;
+	color: white;
+	border: none;
+	width: 130px;
+	height: 40px;
+	margin: 20px;
+
+	&:hover {
+		background-color: $light-blue-btn;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
