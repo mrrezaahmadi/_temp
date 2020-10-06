@@ -3,7 +3,7 @@ import React from "react";
 // Styles
 import "./search-result.styles.scss";
 
-const SearchResult = ({ link, title, subtitle, textContent }) => {
+const SearchResult = ({ link, title, subtitle, textContent, thumb }) => {
 	return (
 		<div className="search-result">
 			<div className="header">
@@ -11,10 +11,19 @@ const SearchResult = ({ link, title, subtitle, textContent }) => {
 					{title}
 				</a>
 			</div>
-			<div className="subheader">{subtitle}</div>
+			<div className="subheader">{subtitle.substr(0, 80)}</div>
 			<div className="content">
-				<div className="thumbnail">content thumbnail</div>
-				<div className="text">{textContent}</div>
+				{thumb ? (
+					<img
+						style={{ border: "none" }}
+						className="thumbnail"
+						alt="thumbnail"
+						src={thumb}
+					/>
+				) : (
+					<div className="thumbnail">content thumbnail</div>
+				)}
+				<div className="text">{textContent.substr(0, 350)}</div>
 			</div>
 		</div>
 	);

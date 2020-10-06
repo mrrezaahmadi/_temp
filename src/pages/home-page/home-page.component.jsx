@@ -14,28 +14,52 @@ import Skeleton from "../../components/search-result-skeleton/search-result-skel
 import { fetchSearchStartAsync } from "../../redux/results/results.thunk";
 
 const HomePage = ({ isFetching, results, fetchSearchStartAsync }) => {
-	const [searchValue, setSearchValue] = useState("apple");
+	const [searchValue, setSearchValue] = useState("");
 	const [pageIndex, setPageIndex] = useState(0);
 
 	useEffect(() => {
 		fetchSearchStartAsync(searchValue, pageIndex);
 	}, [searchValue, pageIndex]);
 
+	const handleChangeInput = (e) => {
+		setSearchValue(e.target.value);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setSearchValue(e.target.value);
+	};
+
 	return (
 		<div className="home-page">
-			<SearchForm />
+			<SearchForm
+				handleSubmit={handleSubmit}
+				handleChangeInput={handleChangeInput}
+			/>
 			<div className="search-results">
-				{isFetching
-					? [...Array(10)].map((_, i) => <Skeleton key={i} />)
-					: results.map((result, i) => (
-							<SearchResult
-								key={i}
-								link={result.link}
-								title={result.title}
-								subtitle={result.link}
-								textContent={result.snippet}
-							/>
-					  ))}
+				{isFetching ? (
+					[...Array(10)].map((_, i) => <Skeleton key={i} />)
+				) : searchValue !== "" && results ? (
+					results.map((result, i) => (
+						<SearchResult
+							key={i}
+							link={result.link}
+							title={result.title}
+							subtitle={result.link}
+							textContent={result.snippet}
+							thumb={
+								result.pagemap &&
+								result.pagemap.cse_thumbnail &&
+								result.pagemap.cse_thumbnail[0].src
+							}
+						/>
+					))
+				) : (
+					<span>
+						This Programmable Search Engine developed by{" "}
+						<strong>Mohammad Reza Ahmadi</strong>
+					</span>
+				)}
 			</div>
 			<div className="navigation-btns">
 				<CustomButton buttonText={"Previous Page"} />
