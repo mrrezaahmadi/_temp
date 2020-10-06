@@ -5,17 +5,16 @@ import "./home-page.styles.scss";
 
 // Components
 import SearchForm from "../../components/search-form/search-form.component";
+import SearchResult from "../../components/search-result/search-result.component";
 
 const HomePage = () => {
 	return (
 		<div className="home-page">
-			{/* Search Section */}
 			<SearchForm />
 			<div className="search-results">
-				{/* Here goes the search result items */}
-				<div className="search-result"></div>
-				<div className="search-result"></div>
-				<div className="search-result"></div>
+				{[...Array(10)].map((_, i) => (
+					<SearchResult key={i} />
+				))}
 			</div>
 			<div className="navigation-btns">
 				<div className="prev-page-btn"></div>

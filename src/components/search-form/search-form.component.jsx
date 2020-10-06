@@ -12,10 +12,11 @@ const SearchForm = () => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<input
+                type="text"
 				className="search-input"
 				placeholder="What do you want to search?"
 			/>
-            <button className="search-btn">Search</button>
+            <button type="submit" className="search-btn">Search</button>
 		</form>
 	);
 };
