@@ -12,6 +12,7 @@ $light-blue-btn: rgba(60, 60, 255, 0.9);
 
 	&:hover {
 		background-color: $light-blue-btn;
+		cursor: pointer;
 	}
 
 	&:focus {

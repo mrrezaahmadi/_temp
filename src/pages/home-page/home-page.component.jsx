@@ -13,13 +13,13 @@ import Skeleton from "../../components/search-result-skeleton/search-result-skel
 // Redux actions
 import { fetchSearchStartAsync } from "../../redux/results/results.thunk";
 
-const HomePage = ({ isFetching, results, fetchSearchStartAsync }) => {
+const HomePage = ({ isFetching, results, fetchSearchStartAsync, queries }) => {
 	const [searchValue, setSearchValue] = useState("");
-	const [pageIndex, setPageIndex] = useState(0);
+	const [pageIndex, setPageIndex] = useState(1);
 
 	useEffect(() => {
 		fetchSearchStartAsync(searchValue, pageIndex);
-	}, [searchValue, pageIndex]);
+	}, [searchValue, pageIndex, fetchSearchStartAsync]);
 
 	const handleChangeInput = (e) => {
 		setSearchValue(e.target.value);
@@ -30,6 +30,10 @@ const HomePage = ({ isFetching, results, fetchSearchStartAsync }) => {
 		setSearchValue(e.target.value);
 	};
 
+	const handleClick = (index) => {
+		setPageIndex(index);
+	};
+	
 	return (
 		<div className="home-page">
 			<SearchForm
@@ -61,9 +65,24 @@ const HomePage = ({ isFetching, results, fetchSearchStartAsync }) => {
 					</span>
 				)}
 			</div>
+
 			<div className="navigation-btns">
-				<CustomButton buttonText={"Previous Page"} />
-				<CustomButton buttonText={"Next Page"} />
+				{queries &&
+				queries.previousPage &&
+				queries.previousPage[0].startIndex ? (
+					<CustomButton
+						index={queries.previousPage[0].startIndex}
+						handleClick={handleClick}
+						buttonText={"Previous Page"}
+					/>
+				) : null}
+				{queries && queries.nextPage && queries.nextPage[0].startIndex ? (
+					<CustomButton
+						index={queries.nextPage[0].startIndex}
+						handleClick={handleClick}
+						buttonText={"Next Page"}
+					/>
+				) : null}
 			</div>
 		</div>
 	);
@@ -72,6 +91,7 @@ const HomePage = ({ isFetching, results, fetchSearchStartAsync }) => {
 const mapStateToProps = (state) => ({
 	results: state.results.resultItems,
 	isFetching: state.results.isFetching,
+	queries: state.results.queries,
 });
 
 export default connect(mapStateToProps, { fetchSearchStartAsync })(HomePage);

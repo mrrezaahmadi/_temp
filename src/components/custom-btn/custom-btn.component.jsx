@@ -3,8 +3,12 @@ import React from "react";
 // Styles
 import "./custom-btn.styles.scss";
 
-const CustomButton = ({ buttonText }) => {
-	return <button className="custom-btn">{buttonText}</button>;
+const CustomButton = ({ buttonText, index, handleClick }) => {
+	return (
+		<button onClick={() => handleClick(index)} className="custom-btn">
+			{buttonText}
+		</button>
+	);
 };
 
 export default CustomButton;

@@ -1,9 +1,14 @@
 .search-result {
-	border: 1px solid black;
+	border: 1px solid transparent;
+	border-radius: 5px;
 	margin: 10px 0;
 	padding: 5px;
 	height: 150px;
 	width: 780px;
+	background-color: white;
+	-webkit-box-shadow: -1px -1px 20px -7px rgba(0, 0, 0, 0.36);
+	-moz-box-shadow: -1px -1px 20px -7px rgba(0, 0, 0, 0.36);
+	box-shadow: -1px -1px 20px -7px rgba(0, 0, 0, 0.36);
 
 	.header {
 		a {
@@ -22,13 +27,13 @@
 		display: flex;
 		margin-top: 5px;
 		.text {
-            font-size: 18px;
-            margin-left: 20px;
+			font-size: 18px;
+			margin-left: 20px;
 		}
 		.thumbnail {
 			height: 75px;
-            width: 75px;
-            border: 1px solid black;
+			width: 75px;
+			border: 1px solid black;
 		}
 	}
 }
