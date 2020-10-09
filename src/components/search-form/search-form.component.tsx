@@ -3,7 +3,16 @@ import React from "react";
 // Styles
 import "./search-form.styles.scss";
 
-const SearchForm = ({ handleChangeInput, handleSubmit }) => {
+// Interfaces
+interface SearchFromProps {
+	handleChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const SearchForm: React.FC<SearchFromProps> = ({
+	handleChangeInput,
+	handleSubmit,
+}) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<input

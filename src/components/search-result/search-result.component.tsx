@@ -3,7 +3,21 @@ import React from "react";
 // Styles
 import "./search-result.styles.scss";
 
-const SearchResult = ({ link, title, subtitle, textContent, thumb }) => {
+interface SearchResultsProps {
+	link: string;
+	title: string;
+	subtitle: string;
+	textContent: string;
+	thumb: string;
+}
+
+const SearchResult: React.FC<SearchResultsProps> = ({
+	link,
+	title,
+	subtitle,
+	textContent,
+	thumb,
+}) => {
 	return (
 		<div className="search-result">
 			<div className="header">

@@ -12,8 +12,42 @@ import Skeleton from "../../components/search-result-skeleton/search-result-skel
 
 // Redux actions
 import { fetchSearchStartAsync } from "../../redux/results/results.thunk";
+import { State } from "../../redux/results/results.types";
 
-const HomePage = ({ isFetching, results, fetchSearchStartAsync, queries }) => {
+// Interfaces
+interface StateProps {
+	isFetching: boolean;
+	results: Result[];
+	queries: Queries;
+}
+
+interface Result {
+	link: string;
+	title: string;
+	snippet: string;
+	pagemap: any;
+}
+
+interface OwnProps {}
+
+interface DispatchProps {
+	fetchSearchStartAsync: (searchValue: string, pageIndex: number) => void;
+}
+
+interface HomePageProps extends StateProps, DispatchProps {}
+
+interface Queries {
+	nextPage: any[];
+	previousPage: any[];
+	request: any[];
+}
+
+const HomePage: React.FC<HomePageProps> = ({
+	isFetching,
+	results,
+	fetchSearchStartAsync,
+	queries,
+}) => {
 	const [searchValue, setSearchValue] = useState("");
 	const [pageIndex, setPageIndex] = useState(1);
 
@@ -21,19 +55,19 @@ const HomePage = ({ isFetching, results, fetchSearchStartAsync, queries }) => {
 		fetchSearchStartAsync(searchValue, pageIndex);
 	}, [searchValue, pageIndex, fetchSearchStartAsync]);
 
-	const handleChangeInput = (e) => {
+	const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.target.value);
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setSearchValue(e.target.value);
+		setSearchValue((e.target as HTMLInputElement).value);
 	};
 
-	const handleClick = (index) => {
+	const handleClick = (index: number) => {
 		setPageIndex(index);
 	};
-	
+
 	return (
 		<div className="home-page">
 			<SearchForm
@@ -88,10 +122,15 @@ const HomePage = ({ isFetching, results, fetchSearchStartAsync, queries }) => {
 	);
 };
 
-const mapStateToProps = (state) => ({
-	results: state.results.resultItems,
+const mapStateToProps = (state: State) => ({
+	results: state.results.results,
 	isFetching: state.results.isFetching,
 	queries: state.results.queries,
 });
 
-export default connect(mapStateToProps, { fetchSearchStartAsync })(HomePage);
+export default connect<StateProps, DispatchProps, OwnProps, State>(
+	mapStateToProps,
+	{
+		fetchSearchStartAsync,
+	}
+)(HomePage);
